@@ -14,12 +14,6 @@ const addService = async (dataService) => {
   return createdService;
 };
 
-const delService = async (idService) => {
-  const [deletedService] = await connection.execute('DELETE FROM services WHERE id=?', [idService]);
-
-  return deletedService;
-};
-
 const updtService = async (idService, dataService) => {
   const { name, price, duration } = dataService;
 
@@ -28,9 +22,15 @@ const updtService = async (idService, dataService) => {
   return updatedService;
 };
 
+const delService = async (idService) => {
+  const [deletedService] = await connection.execute('DELETE FROM services WHERE id=?', [idService]);
+
+  return deletedService;
+};
+
 module.exports = {
   getServices,
   addService,
-  delService,
-  updtService
+  updtService,
+  delService
 };

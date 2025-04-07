@@ -7,7 +7,7 @@ const getServices = async (req, res) => {
     return res.status(200).json(services);
   } catch (error) {
     console.log('Erro em getServices controller', error);
-    return res.status(500).json({ error: 'Erro interno no servidor' });
+    return res.status(500).json({ error: 'Erro ao listar serviços' });
   }
 }
 
@@ -19,19 +19,6 @@ const addService = async (req, res) => {
   } catch (error) {
     console.error('Erro em addService:', error);
     return res.status(500).json({ error: 'Erro ao adicionar serviço' });
-  }
-}
-
-const delService = async (req, res) => {
-  try {
-    const { id } = req.params;
-
-    await serviceModel.delService(id);
-
-    return res.status(204).json();
-  } catch (error) {
-    console.error('Erro em delService:', error);
-    return res.status(500).json({ error: 'Erro ao deletar serviço' });
   }
 }
 
@@ -48,9 +35,22 @@ const updtService = async (req, res) => {
   }
 }
 
+const delService = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    await serviceModel.delService(id);
+
+    return res.status(204).json();
+  } catch (error) {
+    console.error('Erro em delService:', error);
+    return res.status(500).json({ error: 'Erro ao deletar serviço' });
+  }
+}
+
 module.exports = {
   getServices,
   addService,
-  delService,
-  updtService
+  updtService,
+  delService
 };
